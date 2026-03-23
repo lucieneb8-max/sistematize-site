@@ -30,7 +30,10 @@ import {
   Check,
   Send,
   Bot,
-  Loader2
+  Loader2,
+  UserX,
+  DollarSign,
+  ShieldAlert
 } from 'lucide-react';
 import { GoogleGenAI } from "@google/genai";
 import { motion, AnimatePresence } from 'motion/react';
@@ -209,6 +212,87 @@ const Hero = () => {
             </motion.div>
           </div>
         </motion.div>
+      </div>
+    </section>
+  );
+};
+
+const PainPointsSection = () => {
+  const problems = [
+    { icon: <AlertCircle className="w-6 h-6" />, text: "Falta de organização nos atendimentos" },
+    { icon: <UserX className="w-6 h-6" />, text: "Clientes esquecidos ou sem resposta" },
+    { icon: <DollarSign className="w-6 h-6" />, text: "Dificuldade para controlar financeiro" },
+    { icon: <ShieldAlert className="w-6 h-6" />, text: "Imagem pouco profissional" }
+  ];
+
+  return (
+    <section className="py-20 bg-white/5 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">
+              Você está tocando seu negócio <span className="text-neon-blue">sem um site ou sistema</span> de gestão?
+            </h2>
+            <p className="text-gray-400 text-lg mb-8 leading-relaxed">
+              Se você ainda controla tudo pelo WhatsApp, caderno ou planilhas, pode estar perdendo clientes e dinheiro sem perceber.
+            </p>
+            
+            <div className="grid sm:grid-cols-2 gap-4 mb-10">
+              {problems.map((problem, idx) => (
+                <motion.div 
+                  key={idx}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.1 }}
+                  className="flex items-center gap-3 p-4 glass rounded-xl border-white/5 hover:border-neon-blue/30 transition-all"
+                >
+                  <div className="text-neon-blue">{problem.icon}</div>
+                  <span className="text-sm font-medium text-gray-200">{problem.text}</span>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="glass p-8 md:p-12 rounded-[40px] border-neon-blue/20 bg-neon-blue/5 relative"
+          >
+            <div className="absolute -top-6 -left-6 w-12 h-12 bg-neon-blue rounded-full flex items-center justify-center neon-glow-blue">
+              <Zap className="text-black w-6 h-6" />
+            </div>
+            <h3 className="text-2xl font-bold mb-6">A Solução que seu Negócio Precisa</h3>
+            <p className="text-gray-300 text-lg mb-10 leading-relaxed">
+              "Eu te ajudo a transformar seu negócio com sistemas e sites profissionais, organizando sua rotina, automatizando processos e aumentando sua produtividade."
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4">
+              <a 
+                href="https://wa.me/5561981633722" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex-1 flex items-center justify-center gap-2 px-6 py-4 bg-[#25D366] text-white font-bold rounded-xl hover:bg-[#128C7E] transition-all shadow-lg shadow-green-500/20"
+              >
+                <MessageCircle className="w-5 h-5" />
+                Falar no WhatsApp
+              </a>
+              <a 
+                href="#contato"
+                className="flex-1 flex items-center justify-center gap-2 px-6 py-4 glass text-white font-bold rounded-xl hover:bg-white/10 transition-colors"
+              >
+                Solicitar orçamento
+              </a>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
@@ -1187,6 +1271,7 @@ export default function App() {
       <Navbar />
       <main>
         <Hero />
+        <PainPointsSection />
         <Services />
         <Features />
         <Showcase />
